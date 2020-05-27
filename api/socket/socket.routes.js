@@ -3,18 +3,25 @@ module.exports = connectSockets
 
 function connectSockets(io) {
     io.on('connection', socket => {
-        socket.on('chat newMsg', msg=>{
-            console.log(msg)
+        console.log('a user is connected');
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        })
+
+        socket.on('board updated', boardId => {
+            console.log('update event on socket factory', boardId)
             // io.emit('chat addMsg', msg)
             // emits only to sockets in the same room
-            io.to(socket.myTopic).emit('chat addMsg', msg)
+            socket.broadcast.to(socket.currBoard).emit('board updated', boardId)
         })
-        socket.on('chat topic', topic=>{
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
+        socket.on('boardLoad', boardId => {
+            if (socket.currBoard) {
+                socket.leave(socket.currBoard)
             }
-            socket.join(topic)
-            socket.myTopic = topic;
+            socket.join(boardId)
+            socket.currBoard = boardId;
+            console.log('new board loaded', boardId);
+
         })
     })
 }
