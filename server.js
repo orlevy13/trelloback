@@ -12,6 +12,7 @@ const io = require('socket.io')(http);
 app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static('public'));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
