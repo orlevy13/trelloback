@@ -11,6 +11,7 @@ const io = require('socket.io')(http);
 // Express App Config
 app.use(cookieParser())
 app.use(bodyParser.json());
+app.use(cors());
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -18,15 +19,15 @@ app.use(session({
     cookie: { secure: false }
 }))
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.resolve(__dirname, 'public')));
-} else {
-    const corsOptions = {
-        origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
-        credentials: true
-    };
-    app.use(cors(corsOptions));
-}
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.resolve(__dirname, 'public')));
+// } else {
+//     const corsOptions = {
+//         origin: ['http://127.0.0.1:8080', 'http://localhost:8080', 'http://127.0.0.1:3000', 'http://localhost:3000'],
+//         credentials: true
+//     };
+//     app.use(cors(corsOptions));
+// }
 
 
 const authRoutes = require('./api/auth/auth.routes')
