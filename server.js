@@ -20,16 +20,18 @@ app.use(session({
     cookie: { secure: false }
 }))
 
+
+const authRoutes = require('./api/auth/auth.routes')
+const userRoutes = require('./api/user/user.routes')
+const boardRoutes = require('./api/board/board.routes')
+const connectSockets = require('./api/socket/socket.routes')
+
 // routes
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/board', boardRoutes)
 connectSockets(io)
 
-const authRoutes = require('./api/auth/auth.routes')
-const userRoutes = require('./api/user/user.routes')
-const boardRoutes = require('./api/board/board.routes')
-const connectSockets = require('./api/socket/socket.routes')
 
 
 const logger = require('./services/logger.service')
