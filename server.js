@@ -55,6 +55,7 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
+
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)
 });
