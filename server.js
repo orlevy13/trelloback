@@ -30,9 +30,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(cors(corsOptions));
 }
 
-app.get('/**', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-})
+
 
 
 const authRoutes = require('./api/auth/auth.routes')
@@ -50,6 +48,13 @@ connectSockets(io)
 
 const logger = require('./services/logger.service')
 const port = process.env.PORT || 3030;
+
+if (process.env.NODE_ENV === 'production') {
+    app.get('/**', (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    })
+}
+
 http.listen(port, () => {
     logger.info('Server is running on port: ' + port)
 });
