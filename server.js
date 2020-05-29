@@ -11,6 +11,8 @@ const io = require('socket.io')(http);
 // Express App Config
 app.use(cookieParser())
 app.use(bodyParser.json());
+app.use(cors());
+app.use(express.static('public'));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -37,7 +39,6 @@ const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const boardRoutes = require('./api/board/board.routes')
 const connectSockets = require('./api/socket/socket.routes')
-
 
 // routes
 app.use('/api/auth', authRoutes)
