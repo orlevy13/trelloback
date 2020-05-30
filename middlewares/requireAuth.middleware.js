@@ -1,10 +1,10 @@
 const logger = require('../services/logger.service')
 
 async function requireAuth(req, res, next) {
-  if (!req.session || !req.session.user) {
-    res.status(401).end('Unauthorized!');
-    return;
-  }
+  // if (!req.session || !req.session.user) {  ///not working for every body talk to yaron!!!!
+  //   res.status(401).end('Unauthorized!');
+  //   return;
+  // }
   next();
 }
 
