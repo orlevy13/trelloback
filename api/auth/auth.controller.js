@@ -18,9 +18,9 @@ async function signup(req, res) {
     try {
         const { email, password, fullName } = req.body
         logger.debug(email + ", " + fullName + ', ' + password)
-        const account = await authService.signup(email, password, fullName)
+        const user = await authService.signup(email, password, fullName)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
-        res.json('signed up user');
+        res.json(user);
     } catch (err) {
         logger.error('[SIGNUP] ' + err)
         res.status(500).send({ error: 'could not signup, please try later' })
