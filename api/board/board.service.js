@@ -32,7 +32,6 @@ async function save(board) {
         else {
             board._id = ObjectId(board._id);
             result = await collection.replaceOne({ "_id": board._id }, { $set: board });
-            console.log(result);
         }
 
     } catch (err) {

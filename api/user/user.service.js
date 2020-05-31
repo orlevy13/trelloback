@@ -80,7 +80,6 @@ async function update(user) {
 }
 
 async function add(user) {
-    console.log('user service back:', user);
 
     const collection = await dbService.getCollection('user')
     try {
