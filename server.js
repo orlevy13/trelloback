@@ -12,7 +12,7 @@ const io = require('socket.io')(http);
 // Express App Config
 app.use(cookieParser())
 app.use(bodyParser.json({ limit: '50mb' })); //add by alon, do not delet if fix long url ptoblem
-app.use(cors());
+// app.use(cors());
 app.use(express.static('public'));
 app.use(session({
     secret: 'keyboard cat',
