@@ -81,15 +81,13 @@ async function update(user) {
 
 async function add(user) {
 
-    const collection = await dbService.getCollection('user')
-    try {
-        await collection.insertOne(user);
-        delete user.password;
-        return user;
-    } catch (err) {
-        console.log(`ERROR: cannot insert user`)
-        throw err;
-    }
+    const collection = await dbService.getCollection('user');
+    const { email, fullName } = user;
+    const isUserExists = await collection.findOne({ $or: [{ email }, { fullName }] }); //case sensitive should use be ignore case index or user aggregation
+    if (isUserExists) throw 'Cannot insert new user, fullname or email allready exists'
+    await collection.insertOne(user);
+    delete user.password;
+    return user;
 }
 
 function _buildCriteria(filterBy) {

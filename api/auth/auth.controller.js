@@ -23,7 +23,7 @@ async function signup(req, res) {
         res.json(user);
     } catch (err) {
         logger.error('[SIGNUP] ' + err)
-        res.status(500).send({ error: 'could not signup, please try later' })
+        res.status(500).send(err);
     }
 }
 
